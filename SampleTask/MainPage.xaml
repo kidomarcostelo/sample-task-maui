@@ -66,11 +66,11 @@
                 Clicked="FirstBtn_Clicked"
                 HorizontalOptions="Center" 
                 Style="{StaticResource ButtonStyle}"/>
+            
             <Button
                 x:Name="SecondBtn"
                 Text="{Binding Counter}"
                 Command="{Binding IncrementCounterCommand}"
-                Clicked="OnCounterClicked"
                 HorizontalOptions="Center" 
                 Style="{StaticResource ButtonStyle}"/>
 

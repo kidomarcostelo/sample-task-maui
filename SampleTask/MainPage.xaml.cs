@@ -4,11 +4,23 @@ namespace SampleTask;
 
 public partial class MainPage : ContentPage
 {
-    public int Counter { get; set; }
     public bool SecondButtonEnabled { get; set; }
 
     public ICommand IncrementCounterCommand { get; set; }
 
+    private int _counter;
+    public int Counter
+    {
+        get { return _counter; }
+        set
+        {
+            if (_counter != value)
+            {
+                _counter = value;
+                OnPropertyChanged(nameof(Counter));
+            }
+        }
+    }
 
     public MainPage()
 	{
@@ -18,21 +30,10 @@ public partial class MainPage : ContentPage
         BindingContext = this;
     }
 
-
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-        ((Command)IncrementCounterCommand).ChangeCanExecute();
-
-		SecondBtn.Text = $"{Counter}";
-
-		SemanticScreenReader.Announce(SecondBtn.Text);
-	}
-
     private void FirstBtn_Clicked(object sender, EventArgs e)
     {
         SecondButtonEnabled = !SecondButtonEnabled;
-
-		SecondBtn.IsEnabled = CanIncrementCounter();
+        ((Command)IncrementCounterCommand).ChangeCanExecute();
     }
 
     void IncrementCounter()
